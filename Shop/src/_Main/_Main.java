@@ -1,10 +1,14 @@
 package _Main;
 
+import Controller.ShopController;
+
 public class _Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		// 샵 실행
+		ShopController shop = new ShopController();
+		shop.run();
+		
 	}
 
 }
