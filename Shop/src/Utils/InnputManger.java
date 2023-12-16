@@ -28,10 +28,6 @@ public class InnputManger {
         return sc.next();
     }
 
-    public static String inputLine() {
-        return sc.nextLine();
-    }
-
     public static void close() {
         sc.close();
     }

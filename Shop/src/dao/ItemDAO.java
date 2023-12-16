@@ -2,12 +2,11 @@ package dao;
 
 import java.util.ArrayList;
 import vo.Item;
-import vo.User;
 import vo.Cart;
 
 public class ItemDAO {
-    private ArrayList<Item> items = new ArrayList<Item>();
-    private ArrayList<Cart> carts = new ArrayList<Cart>();
+    public ArrayList<Item> items = new ArrayList<Item>();
+    public ArrayList<Cart> carts = new ArrayList<Cart>();
 
     public void addItem(Item item) {
         items.add(item);

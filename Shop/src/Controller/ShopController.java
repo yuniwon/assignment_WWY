@@ -24,23 +24,64 @@ public class ShopController {
 
 		while (true) {
 			int sel = Utils.InnputManger.inputInt("", start, end);
-			switch (sel) {
-				case 1: // 가입
-					join();
-					break;
-				case 2: // 탈퇴
-					break;
-				case 3: // 로그인
-					break;
-				case 4: // 로그아웃
-					break;
-				case 100: // 관리자
-					adminMenu();
-					break;
-				case 0: // 종료
-					break;
-				default:
-					break;
+			if (menu == 0) {
+				switch (sel) {
+					case 1: // 가입
+						join();
+						break;
+					case 2: // 탈퇴
+						break;
+					case 3: // 로그인
+						break;
+					case 4: // 로그아웃
+						break;
+					case 100: // 관리자
+						adminMenu();
+						break;
+					case 0: // 종료
+						break;
+					default:
+						continue;
+				}
+			} else if (menu == 1) {
+				switch (sel) {
+					case 1: // 쇼핑
+						break;
+					case 2: // 장바구니목록
+						break;
+					case 0: // 뒤로가기
+						break;
+					default:
+						continue;
+				}
+			} else if (menu == 2) {
+				switch (sel) {
+					case 1: // 내 장바구니
+						break;
+					case 2: // 삭제
+						break;
+					case 3: // 구입
+						break;
+					case 0: // 뒤로가기
+						break;
+					default:
+						continue;
+				}
+			} else if (menu == 3) {
+				switch (sel) {
+					case 1: // 아이템관리
+						break;
+					case 2: // 카테고리관리
+						break;
+					case 3: // 장바구니관리
+						break;
+					case 4: // 유저관리
+						break;
+					case 0: // 뒤로가기
+						break;
+					default:
+						continue;
+				}
 			}
 
 		}
@@ -84,7 +125,7 @@ public class ShopController {
 	private void join() {
 		Utils.InnputManger.inputStr("아이디를 입력해주세요.");
 		// 아이디 중복체크
-		udao.checkId();
+		// udao.checkId();
 
 		// 비밀번호 확인
 		// 회원가입
