@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.ArrayList;
+
 
 import dao.ItemDAO;
 import dao.UserDAO;
@@ -75,7 +75,7 @@ public class FileManager {
 		// item 데이터 저장
 		data = "";
 		for (int i = 0; i < idao.items.size(); i++) {
-			data += idao.items.get(i).getName() + "/" + idao.items.get(i).getPrice() + idao.items.get(i).getCategory()
+			data += idao.items.get(i).getName() + "/" + idao.items.get(i).getPrice() +"/"+ idao.items.get(i).getCategory()
 					+ "\n";
 		}
 		data = data.substring(0, data.length() - 1);

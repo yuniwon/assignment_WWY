@@ -1,6 +1,5 @@
 package Controller;
 
-import java.util.ArrayList;
 
 import dao.ItemDAO;
 import dao.UserDAO;
@@ -21,7 +20,7 @@ public class ShopController {
 	public void run() {
 		// 메인화면 출력 (가입 탈퇴 로그인 로그아웃 관리자)
 		int start = 0;
-		int end = 4;
+		int end = 5;
 
 		while (true) {
 			if (menu == 0)
@@ -56,7 +55,7 @@ public class ShopController {
 					case 4: // 로그아웃
 						id = udao.logout();
 						break;
-					case 100: // 관리자
+					case 5: // 관리자
 						menu = 3;
 						break;
 					case 0: // 종료
@@ -119,10 +118,13 @@ public class ShopController {
 			} else if (menu == 4) { // 아이템 관리 메뉴
 				switch (sel) {
 					case 1: // 아이템추가
+						idao.addItem();
 						break;
 					case 2: // 아이템삭제
+						idao.deleteItem();
 						break;
 					case 3: // 아이템수정
+						idao.updateItem();
 						break;
 					case 0: // 뒤로가기
 						menu = 3;
@@ -134,11 +136,13 @@ public class ShopController {
 			} else if (menu == 5) { // 카테고리 관리 메뉴
 				switch (sel) {
 					case 1: // 카테고리추가
-					idao.addCategory();
+						idao.addCategory();
 						break;
 					case 2: // 카테고리삭제
+						idao.deleteCategory();
 						break;
 					case 3: // 카테고리수정
+						idao.updateCategory();
 						break;
 					case 0: // 뒤로가기
 						menu = 3;
