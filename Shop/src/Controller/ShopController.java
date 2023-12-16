@@ -9,79 +9,145 @@ public class ShopController {
 	public ItemDAO idao;
 	public UserDAO udao;
 	private int menu;
+	private String id;
 
 	public ShopController() {
 		idao = new ItemDAO();
 		udao = new UserDAO();
 		menu = 0;
+		id = "";
 	}
 
 	public void run() {
 		// 메인화면 출력 (가입 탈퇴 로그인 로그아웃 관리자)
-		mainMenu();
 		int start = 0;
 		int end = 4;
 
 		while (true) {
+			if (menu == 0)
+				mainMenu();
+			else if (menu == 1)
+				userMenu();
+			else if (menu == 2)
+				cartMenu();
+			else if (menu == 3)
+				adminMenu();
+			else if (menu == 4)
+				itemMenu();
+			else if (menu == 5)
+				categoryMenu();
+
 			int sel = Utils.InnputManger.inputInt("", start, end);
 			if (menu == 0) {
-				switch (sel) {
+				switch (sel) { // 로그인 아닐시에는 가입/로그인/관리자/종료만 가능 // 로그인시에는 탈퇴/로그아웃/쇼핑/장바구니목록 가능
 					case 1: // 가입
-						join();
+						udao.join();
 						break;
 					case 2: // 탈퇴
+						udao.delete(idao); // 탈퇴시에는 장바구니도 삭제
 						break;
 					case 3: // 로그인
+						id = udao.login();
+						if (id.equals(""))
+							System.out.println("로그인 실패");
+						else
+							menu = 1;
 						break;
 					case 4: // 로그아웃
+						id = udao.logout();
 						break;
 					case 100: // 관리자
-						adminMenu();
+						menu = 3;
 						break;
 					case 0: // 종료
-						break;
+						return;
 					default:
 						continue;
 				}
 			} else if (menu == 1) {
+				// 로그인 메뉴
 				switch (sel) {
 					case 1: // 쇼핑
+						menu = 2;
 						break;
 					case 2: // 장바구니목록
+						idao.cartList();
 						break;
 					case 0: // 뒤로가기
+						menu = 0;
 						break;
 					default:
 						continue;
 				}
 			} else if (menu == 2) {
+				// 쇼핑메뉴
 				switch (sel) {
 					case 1: // 내 장바구니
+						idao.cartList(id);
 						break;
 					case 2: // 삭제
+						idao.deleteItemById(id);
 						break;
 					case 3: // 구입
+						idao.buyItem(id);
 						break;
 					case 0: // 뒤로가기
+						menu = 1;
 						break;
 					default:
 						continue;
 				}
-			} else if (menu == 3) {
+			} else if (menu == 3) { // 관리자 메뉴
 				switch (sel) {
 					case 1: // 아이템관리
+						menu = 4;
 						break;
 					case 2: // 카테고리관리
+						menu = 5;
 						break;
 					case 3: // 장바구니관리
 						break;
 					case 4: // 유저관리
 						break;
 					case 0: // 뒤로가기
+						menu = 0;
 						break;
 					default:
 						continue;
 				}
+
+			} else if (menu == 4) { // 아이템 관리 메뉴
+				switch (sel) {
+					case 1: // 아이템추가
+						break;
+					case 2: // 아이템삭제
+						break;
+					case 3: // 아이템수정
+						break;
+					case 0: // 뒤로가기
+						menu = 3;
+						break;
+					default:
+						continue;
+
+				}
+			} else if (menu == 5) { // 카테고리 관리 메뉴
+				switch (sel) {
+					case 1: // 카테고리추가
+					idao.addCategory();
+						break;
+					case 2: // 카테고리삭제
+						break;
+					case 3: // 카테고리수정
+						break;
+					case 0: // 뒤로가기
+						menu = 3;
+						break;
+					default:
+						continue;
+				}
+			} else {
+				continue;
 			}
 
 		}
@@ -122,14 +188,6 @@ public class ShopController {
 	}
 
 	// 회원가입
-	private void join() {
-		Utils.InnputManger.inputStr("아이디를 입력해주세요.");
-		// 아이디 중복체크
-		// udao.checkId();
-
-		// 비밀번호 확인
-		// 회원가입
-	}
 
 	// System.out.println("[1.가입] [2.탈퇴] [3.로그인] [4.로그아웃]" + "\n[100.관리자] [0.종료] ");
 

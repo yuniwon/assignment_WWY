@@ -17,4 +17,9 @@ public class Cart {
 		return itemName;
 	}
 
+	@Override
+	public String toString() {
+		return "{" + " userId='" + getUserId() + "'" + ", itemName='" + getItemName() + "'" + "}";
+	}
+
 }

@@ -22,4 +22,14 @@ public class User {
 	public String getName() {
 		return name;
 	}
+
+	@Override
+	public String toString() {
+		return "{" +
+				" id='" + getId() + "'" +
+				", pw='" + getPw() + "'" +
+				", name='" + getName() + "'" +
+				"}";
+	}
+
 }
