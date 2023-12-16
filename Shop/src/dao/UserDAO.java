@@ -98,4 +98,25 @@ public class UserDAO {
 
     }
 
+    public void userList() {
+        System.out.println("아이디\t비밀번호\t이름");
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
+
+    public void loadUserDataFromFile() {
+        // 파일에서 유저데이터 불러오기
+        // 파일이 없을시에는 불러오지 않음
+        String data = Utils.FileManager.loadDataFromFile("User.txt");
+        if (data.equals("")) {
+            return;
+        }
+        String[] userArr = data.split("\n");
+        for (String userStr : userArr) {
+            String[] userInfo = userStr.split("/");
+            users.add(new User(userInfo[0], userInfo[1], userInfo[2]));
+        }
+        System.out.println("유저 데이터 로드 완료");
+    }
 }

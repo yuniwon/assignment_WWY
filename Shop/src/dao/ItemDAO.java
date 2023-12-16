@@ -183,39 +183,84 @@ public class ItemDAO {
             if (item.getName().equals(name)) {
                 // 수정할 항목 선택
                 int num = Utils.InnputManger.inputInt("수정할 항목을 선택해주세요.\n1.이름 2.가격 3.카테고리", 1, 3);
-                if(num == 1){
-                // 이름 수정
-                String newName = Utils.InnputManger.inputStr("수정할 이름을 입력해주세요.");
-                // 중복이름 존재여부 확인
-                for (Item i : items) {
-                    if (i.getName().equals(newName)) {
-                        System.out.println("이미 존재하는 이름입니다.");
-                        return;
+                if (num == 1) {
+                    // 이름 수정
+                    String newName = Utils.InnputManger.inputStr("수정할 이름을 입력해주세요.");
+                    // 중복이름 존재여부 확인
+                    for (Item i : items) {
+                        if (i.getName().equals(newName)) {
+                            System.out.println("이미 존재하는 이름입니다.");
+                            return;
+                        }
                     }
-                }
-                item.setName(newName);
-                }else if(num == 2){
-                // 아이템 가격 입력
-                int price = Utils.InnputManger.inputInt("수정할 아이템의 가격을 입력해주세요.");
-                // 가격 수정
-                item.setPrice(price);
-                }else if (num == 3) {
-                                    // 카테고리 수정
-                String categoryName = Utils.InnputManger.inputStr("수정할 카테고리를 입력해주세요.");
-                // 카테고리 존재여부 확인
-                for (Category c : category) {
-                    if (c.getCategoryName().equals(categoryName)) {
-                        item.setCategory(categoryName);
-                        System.out.println("카테고리가 수정되었습니다.");
-                        break;
+                    item.setName(newName);
+                } else if (num == 2) {
+                    // 아이템 가격 입력
+                    int price = Utils.InnputManger.inputInt("수정할 아이템의 가격을 입력해주세요.");
+                    // 가격 수정
+                    item.setPrice(price);
+                } else if (num == 3) {
+                    // 카테고리 수정
+                    String categoryName = Utils.InnputManger.inputStr("수정할 카테고리를 입력해주세요.");
+                    // 카테고리 존재여부 확인
+                    for (Category c : category) {
+                        if (c.getCategoryName().equals(categoryName)) {
+                            item.setCategory(categoryName);
+                            System.out.println("카테고리가 수정되었습니다.");
+                            break;
+                        }
                     }
-                }
-                System.out.println("존재하지 않는 카테고리입니다.");
-                return;
+                    System.out.println("존재하지 않는 카테고리입니다.");
+                    return;
                 }
 
                 return;
             }
+        }
+    }
+
+    public void itemList() {
+        // 아이템리스트 출력
+        for (Item item : items) {
+            System.out.println(item);
+        }
+    }
+
+    public void loadItemDataFromFile() {
+        // 파일에서 아이템 데이터 불러오기
+        String data = Utils.FileManager.loadDataFromFile("Item.txt");
+        if (data.equals("")) {
+            return;
+        }
+        String[] itemArr = data.split("\n");
+        for (String itemStr : itemArr) {
+            String[] itemInfo = itemStr.split("/");
+            items.add(new Item(itemInfo[0], Integer.parseInt(itemInfo[1]), itemInfo[2]));
+        }
+        // 아이템 데이터에서 중복되지 않는 카테고리 데이터 추출
+        for (Item item : items) {
+            boolean isExist = false;
+            if (category.size() == 0) {
+                category.add(new Category(item.getCategory()));
+                continue;
+            }
+            for (Category c : category) {
+                if (c.getCategoryName().equals(item.getCategory())) {
+                    isExist = true;
+                    break;
+                }
+            }
+            if (!isExist) {
+                category.add(new Category(item.getCategory()));
+            }
+        }
+        System.out.println("아이템 데이터 로드 완료");
+    }
+
+    public void categoryList() {
+        // 카테고리 리스트 출력
+        for (Category c : category) {
+            System.out.println(c);
         }
     }
 

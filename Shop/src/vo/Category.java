@@ -15,4 +15,10 @@ public class Category {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                " name='" + getCategoryName() + "'" +
+                "}";
+    }
 }

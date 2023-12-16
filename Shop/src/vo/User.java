@@ -25,11 +25,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "{" +
-				" id='" + getId() + "'" +
-				", pw='" + getPw() + "'" +
-				", name='" + getName() + "'" +
-				"}";
+		return getId() + "\t" + getPw() + "\t" + getName();
 	}
 
 }
